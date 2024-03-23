@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block body %}
+<a href="/">Return to main page</a>
+<p>Number of components: {{ n }}</p>
+<img src="{{url_for('static', filename='image.png')}}">
+<img src="{{url_for('static', filename='mask.png')}}">
+{% endblock %}
