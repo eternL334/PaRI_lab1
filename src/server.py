@@ -20,7 +20,7 @@ def make_prediction(lower, upper, size):
 
     cv.imwrite(os.path.join(UPLOAD_FOLDER, "mask.png"), mask)
 
-    return n 
+    return n - 1 
 
 @app.route("/")
 def index():
