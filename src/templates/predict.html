@@ -1,7 +1,35 @@
 {% extends "base.html" %}
 {% block body %}
 <a href="/">Return to main page</a>
-<p>Number of components: {{ n }}</p>
-<img src="{{url_for('static', filename='image.png')}}">
-<img src="{{url_for('static', filename='mask.png')}}">
+<h2>Number of components: {{ n }}</h2>
+<div class="container">
+    <figure>
+        <img src="{{url_for('static', filename='image.png')}}">
+        <figcaption>Original image</figcaption>
+    </figure>
+    <figure>
+        <img src="{{url_for('static', filename='hue_mask.png')}}">
+        <figcaption>Hue mask</figcaption>
+    </figure>
+</div>
+<div class="container">
+    <figure>
+        <img src="{{url_for('static', filename='saturation_mask.png')}}">
+        <figcaption>Saturation mask</figcaption>
+    </figure>
+    <figure>
+        <img src="{{url_for('static', filename='value_mask.png')}}">
+        <figcaption>Value mask</figcaption>
+    </figure>
+</div>
+<div class="container">
+    <figure>
+        <img src="{{url_for('static', filename='mask.png')}}">
+        <figcaption>HSV mask</figcaption>
+    </figure>
+    <figure>
+        <img src="{{url_for('static', filename='mask_cut.png')}}">
+        <figcaption>Result mask</figcaption>
+    </figure>
+</div>
 {% endblock %}

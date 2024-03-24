@@ -15,10 +15,14 @@ n = 0
 
 def make_prediction(lower, upper, size):
     image = cv.imread(os.path.join(UPLOAD_FOLDER, "image.png"))
-    mask = get_mask(image, lower, upper)
-    n, mask = get_components(mask, size)
-
+    mask, hue_mask, saturation_mask, value_mask = get_mask(image, lower, upper)
     cv.imwrite(os.path.join(UPLOAD_FOLDER, "mask.png"), mask)
+    cv.imwrite(os.path.join(UPLOAD_FOLDER, "hue_mask.png"), hue_mask)
+    cv.imwrite(os.path.join(UPLOAD_FOLDER, "saturation_mask.png"), saturation_mask)
+    cv.imwrite(os.path.join(UPLOAD_FOLDER, "value_mask.png"), value_mask)
+
+    n, mask_cut = get_components(mask, size)
+    cv.imwrite(os.path.join(UPLOAD_FOLDER, "mask_cut.png"), mask_cut)
 
     return n - 1 
 
@@ -51,19 +55,21 @@ def index_post():
 
         size = int(request.form.get("size"))
 
-        print(lower, upper, size)
-
         n = make_prediction(lower, upper, size)
 
         return redirect(url_for('predict'))
     except Exception as e:
         app.logger.warning(f"{e}")
-        return redirect(url_for('index'))
+        return redirect(url_for('fail'))
 
 @app.route("/predict")
 def predict():
     global n
     return render_template("predict.html", n=n)
+
+@app.route("/fail")
+def fail():
+    return render_template("fail.html")
 
 if __name__ == '__main__':
     serve(app, host='0.0.0.0', port='5000')
