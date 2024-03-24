@@ -1,0 +1,5 @@
+numpy
+flask
+werkzeug
+waitress
+opencv-python
